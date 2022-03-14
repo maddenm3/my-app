@@ -1,0 +1,39 @@
+GET http://localhost:3001/users
+content-type: application/json
+
+###
+
+
+GET http://localhost:3001/users
+content-type: application/json 
+
+###
+
+
+POST http://localhost:3001/users
+content-type: application/json
+
+{
+    "name": "mook",
+    "country": "US",
+    "photo": "none",
+    "songName": "Paris Texas",
+    "songArtist": "The Chairs",
+    "songAlbumCover": "none",
+    "songPreview": "none"
+
+}
+
+###
+
+DELETE http://localhost:3001/users/
+
+###
+
+PATCH http://localhost:3001/users/
+content-type: application/json
+
+{
+    "name": "mort",
+    "country": "Ukraine"
+}
