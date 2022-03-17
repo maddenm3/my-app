@@ -4,7 +4,7 @@ content-type: application/json
 ###
 
 
-GET http://localhost:3001/users
+GET http://localhost:3001/users/:Michael
 content-type: application/json 
 
 ###
@@ -17,12 +17,25 @@ content-type: application/json
     "name": "mook",
     "country": "US",
     "photo": "none",
-    "songName": "Paris Texas",
-    "songArtist": "The Chairs",
-    "songAlbumCover": "none",
-    "songPreview": "none"
+    "token": "jjdjfs3r2$",
+    "topSongs": [{"name": "Mike", "artist": "mick"}, {"name": "flike", "artist": "jick"}]
 
 }
+
+###
+
+POST http://localhost:3001/users/songs
+content-type: application/json
+
+{
+    "songName": "hi",
+    "songArtist": "US",
+    "albumCover": "none",
+    "preview": "jjdjfs3r2$"
+
+}
+
+
 
 ###
 
