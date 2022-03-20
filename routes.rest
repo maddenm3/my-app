@@ -14,12 +14,14 @@ POST http://localhost:3001/users
 content-type: application/json
 
 {
-    "name": "mook",
+    "name": "me",
     "country": "US",
     "photo": "none",
     "token": "jjdjfs3r2$",
-    "topSongs": [{"name": "Mike", "artist": "mick"}, {"name": "flike", "artist": "jick"}]
-
+    "topTrack": {"song": "Mike", "artist": "mick", "albumCover": "yes", "preview": "preview"},
+    "artist": "deca joins",
+    "artistImage": "image",
+    "genre": ["yes$","yes"]
 }
 
 ###
