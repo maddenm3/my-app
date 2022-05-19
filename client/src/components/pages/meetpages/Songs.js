@@ -41,44 +41,65 @@ useEffect(() => {
   }, [])
 
 
-const displaySongs = userList?.map((item) => 
-    <div className="song-card" key={item._id}>
-        <NavLink to={`/*/profile/${item._id}`} className="user-tag">
-    <div className="profile-tag">
-        <img src={item.photo} className="meet-header-photo"/>
-        <p className="user-tag">{item.name}</p>
+const displaySongs = userList?.map((item) => {
+    return(
+    <div key={item._id}>
+        <NavLink to={`/*/profile/${item._id}`} className="nav-link">
+            <div className="user-tag">
+                <img src={item.photo} className="meet-header-photo" alt=""/>
+                {item.name}
+            </div>
+        </NavLink>
+
+        <img className="my-top-five-album-cover" src={item.topTrack.albumCover} alt=""/>
+            <div className="song-info">
+                <AudioPlayer 
+                preview={item.topTrack.preview}
+                songName={item.topTrack.song}
+                artist={item.topTrack.artist}
+                />
+
+                {/* <div className="top-track">
+                    <li>{item.topTrack.song}</li>
+                    <li>{item.topTrack.artist}</li>
+                </div> */}
+
+            </div>
     </div>
-    </NavLink>
+    )
+}
 
-<img className="album-cover" src={item.topTrack.albumCover}/>
-<section>
-    <div className="song-info">
-        <AudioPlayer 
-        preview={item.topTrack.preview}
-        />
+)
 
-        <div className="top-track">
-            <li>{item.topTrack.song}</li>
-            <li>{item.topTrack.artist}</li>
-        </div>
+const loadingDisplay = (
+    <div className="display-container">
+        {[0,1,2,3,4,5,6,7,8,9].map(i => {
+            return(
+                <div>
+                    <li className="user-tag-loading"></li>
+                    <img className="loading-album-cover"/>
+                    <div className="top-track">
+                        <li className="loading-tag"></li>
+                    </div>
+                </div>
+            )
+        }
 
+        )
+}
     </div>
-
-    </section>
-
-</div>
-
-
 )
 
 
 
 
 return(
-    <div className="song-page">
-        <h1>Meet the Community's Top Songs</h1>
-        <div className="song-container">
-      {userList && displaySongs}
+    <div className="page">
+        <div className="general-container">
+            <p>Meet the Community's Top Songs</p>
+            <div className="display-container">
+                {userList ? displaySongs : loadingDisplay}
+            </div>
         </div>
     </div>
 )}
