@@ -4,10 +4,14 @@ import {BrowserRouter as Router, Routes, Route, NavLink} from "react-router-dom"
 import { FaRegHandshake } from "react-icons/fa"
 import { BsChat } from "react-icons/bs"
 import { MdOutlineLocalCafe } from "react-icons/md"
+import { MdLibraryMusic } from "react-icons/md"
 import { FaRegUser } from "react-icons/fa"
-import logo from "./subcomponents/Logo.jpg"
+import {CgProfile} from "react-icons/cg"
+import {FiHeadphones} from "react-icons/fi"
+import {IoIosPeople } from "react-icons/io"
+
 import { UserContext } from "../UserContext"
-import Logo from "./../../public"
+import logo from "./../logo3.svg"
 
 export default function Header(props){
 
@@ -16,23 +20,22 @@ export default function Header(props){
 
     return(
         <div className="header">
-            <h6>Melody<b>Meet</b></h6>
-            {/* <img src={logo} className="logo" alt="" /> */}
+            <div className="header-logo">
+            <div><NavLink to="/"><img src={logo} className="logo"/></NavLink></div>
         
+            </div>
             <div className="sidebar">
-                        <div><NavLink to="/*" className={({isActive}) => isActive ? "sidenav-selected" : "sidenav" }><FaRegHandshake/></NavLink></div>
-                        <div><NavLink to="/chat" className={({isActive}) => isActive ? "sidenav-selected" : "sidenav" }><BsChat/></NavLink></div>
+                        {/* <div><NavLink to="/" className={({isActive}) => isActive ? "sidenav-selected" : "sidenav" }><MdLibraryMusic/></NavLink></div> */}
+                        <div><NavLink to="/songs" className={({isActive}) => isActive ? "sidenav-selected" : "sidenav"}><MdLibraryMusic /><p>Songs</p></NavLink></div>
+                        <div><NavLink to="/people" className={({isActive}) => isActive ? "sidenav-selected" : "sidenav"}><IoIosPeople /><p>People</p></NavLink></div>
                         {/* <div><NavLink to="/cafe" className={({isActive}) => isActive ? "sidenav-selected" : "sidenav" }><MdOutlineLocalCafe/></NavLink></div> */}
                         <div> 
-        <NavLink to="/my-profile" className={({isActive}) => isActive ? "profile-tag-selected" : "profile-tag"}>
-            <img className="header-profile" src={user.profilePhoto} alt=""/>
-        </NavLink>
-        </div>
-            </div>
-
-            <h6 className="text-logo">About</h6>
-
-                
+                        <NavLink to="/my-profile" className={({isActive}) => isActive ? "profile-tag-selected" : "profile-tag"}>
+                            {user.profilePhoto ? <img className="header-profile" src={user.profilePhoto} alt=""/> : <CgProfile/>}
+                            <p>Profile</p>
+                        </NavLink>
+                        </div>
+            </div>  
         </div>
     )
 }

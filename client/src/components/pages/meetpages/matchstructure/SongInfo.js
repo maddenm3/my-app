@@ -1,9 +1,9 @@
 import React, { useContext } from "react"
 import { FaPlay } from "react-icons/fa"
 import { FaPause } from "react-icons/fa"
-import { UserContext } from "../../../UserContext"
+import { UserContext } from "../../../../UserContext"
 import Button from "./Button"
-import AudioPlayer from "./subcardcomponents/AudioPlayer"
+import AudioPlayer from "../../meetstructure/AudioPlayer"
 
 export default function SongInfo(props){
 

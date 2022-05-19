@@ -1,6 +1,7 @@
 const express = require('express')
 const router = express.Router()
 const User = require('../models/UserSchema')
+const Song = require('../models/SongSchema')
 const url = require('url')
 
 
@@ -8,6 +9,17 @@ const url = require('url')
 router.get('/', async (req, res) => {
     try{
         const users = await User.find()
+        res.json(users)
+    }
+    catch (err){
+        res.status(500).json({ message: err.message })
+    }
+})
+
+//get 5 users
+router.get('/limit', async (req, res) => {
+    try{
+        const users = await User.find().limit(10)
         res.json(users)
     }
     catch (err){
@@ -23,24 +35,79 @@ router.get('/:id', getUser, (req, res) => {
 
 //create a user
 router.post('/', async (req, res) => {
-    const user = new User({
+    // const user = new User({
+    //     name: req.body.name,
+    //     email: req.body.email,
+    //     country: req.body.country,
+    //     photo: req.body.photo,
+    //     token: req.body.token,
+    //     topTrack: req.body.topTrack,
+    //     artist: req.body.artist,
+    //     artistImage: req.body.artistImage,
+    //     genre: req.body.genre
+    // })
+
+    const query = {email: req.body.email}
+    const update = { 
         name: req.body.name,
+        email: req.body.email,
         country: req.body.country,
-        photo: req.body.photo
-        // topSongs: [{
-        //     songName: req.body.songName,
-        //     songArtist: req.body.songArtist,
-        //     songAlbumCover: req.body.songAlbumCover,
-        //     songPreview: req.body.songPreview
-        // }]           
-    })
+        topTrack: req.body.topTrack,
+        photo: req.body.photo,
+        artist: req.body.artist,
+        artistImage: req.body.artistImage,
+        genre: req.body.genre
+    }
+
+    const options = {
+        upsert: true,
+        returnNewDocument: true
+    }
+
     try{
-        const newUser = await user.save()
-        res.status(201).json(newUser)
+        User.findOneAndUpdate(query, update, options, function(err,doc){
+            if(err){
+                console.log(err)
+            }
+            else{
+                console.log(doc)
+            }
+        })
+        // const newUser = await user.save()
+        // res.status(201).json(newUser)
     }
     catch (err){
         res.status(400).json({ message: err.message })
 
+    }
+})
+
+//create a song
+router.post('/songs', async (req, res) => {
+    const song = new Song({
+        songName: req.body.songName,
+        songArtist: req.body.songArtist,
+        albumCover: req.body.albumCover,
+        preview: req.body.preview,       
+    })
+    try{
+        const newSong = await song.save()
+        res.status(201).json(newSong)
+    }
+    catch (err){
+        res.status(400).json({ message: err.message })
+
+    }
+})
+
+//get all songs
+router.get('/songs', async (req, res) => {
+    try{
+        const songs = await Song.find()
+        res.json(songs)
+    }
+    catch (err){
+        res.status(500).json({ message: err.message })
     }
 })
 

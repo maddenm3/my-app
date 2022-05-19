@@ -1,6 +1,7 @@
 require('dotenv').config()
 const express = require("express");
 const app = express()
+const bodyParser = require('body-parser')
 const cors = require('cors')
 const querystring = require('querystring')
 const axios = require('axios')
@@ -13,6 +14,10 @@ db.once('open', () => console.log('Connected to Database'))
 
 app.use(express.json())
 app.use(cors())
+app.use(express.json())
+app.use(express.urlencoded({ extended: true }))
+app.use(bodyParser.urlencoded())
+app.use(bodyParser.json())
 
 
 const CLIENT_ID = process.env.CLIENT_ID;
@@ -22,7 +27,7 @@ const REDIRECT_URI = process.env.REDIRECT_URI;
 const PORT = 3001;
 
 app.get('/login', (req, res) => {
-  const scope = 'user-read-private user-top-read';
+  const scope = 'user-read-private user-top-read user-read-currently-playing user-read-email';
 
   const queryParams = querystring.stringify({
     client_id: CLIENT_ID,

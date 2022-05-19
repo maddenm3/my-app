@@ -1,6 +1,6 @@
 import { process_params } from "express/lib/router"
 import React, { useContext } from "react"
-import { UserContext } from "../../../UserContext"
+import { UserContext } from "../../../../UserContext"
 
 
 export default function Button(props){
@@ -10,9 +10,9 @@ export default function Button(props){
     return(
         <div>
             <button className="button"
-                onClick={user.HandleChangeSong}
+                onClick={props.handleClick}
                >
-                    Change Song
+                    {props.buttonName}
                 </button>
         </div>
 

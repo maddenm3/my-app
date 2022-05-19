@@ -1,7 +1,7 @@
 import React, { useContext } from "react"
-import { UserContext } from "../../UserContext"
-import Button from "./cardcomponents/Button"
-import SongInfo from "./cardcomponents/SongInfo"
+import { UserContext } from "../../../../UserContext"
+import Button from "./Button"
+import SongInfo from "./SongInfo"
 
 
 export default function Card(props){

@@ -3,12 +3,87 @@ import React, { useState, useEffect, useContext } from "react"
 import { UserContext } from "../../../UserContext"
 import {NavLink } from "react-router-dom"
 import AudioPlayer from "../meetstructure/AudioPlayer"
+import {RiRefreshFill} from "react-icons/ri"
+
 
 
 export default function Songs(){
 
 const user = useContext(UserContext)   
 const [userList, setUserList] = useState(null) 
+
+const genre = user.genre[0]
+const accessToken = user.token
+const [similarSongs, setSimilarSongs] = useState(null)
+const [similarArtists, setSimilarArtists] = useState(null)
+const artistId = user.artistId
+const topSongs = user.topSongs
+const [recs, setRecs] = useState(null)
+const [clicked, setClicked] = useState(false)
+const [trackForRecs, setTrackForRecs] = useState(user.topTrack.id)
+const [id, setId] = useState(0)
+
+
+const getUsers = async () => {
+    try{
+            const response = await axios.get("http://localhost:3001/users/limit")
+            const data = response.data
+            setUserList(data)
+        
+
+    }
+    catch (error){
+        console.log(error)
+    }
+}
+
+
+useEffect(() => {
+
+    let isCancelled = false
+
+    if (!isCancelled){
+        // getUsers
+        getUsers()
+    }
+
+    
+
+    return () => {
+        isCancelled = true
+    }
+}, [])
+
+
+const getRecs = async() => {
+
+    try{
+            const response = await axios.get(`/recommendations?limit=10&seed_tracks=${user && topSongs[id].id}`)
+            setRecs(response.data)
+
+
+    } catch(error){
+        console.log(error)
+    }
+}
+
+useEffect(()=> {
+    let isCancelled = false
+
+    if (!isCancelled){
+        // getSimilarSongs()
+        getRecs()
+
+
+    }
+
+    
+
+    return () => {
+        isCancelled = true
+    }
+
+}, [])
 
 
 
@@ -41,41 +116,76 @@ useEffect(() => {
   }, [])
 
 
-const displaySongs = userList?.map((item) => {
+  
+const recommendations =
+
+(recs &&
+    recs.tracks.map((track, index) => {
+        return(
+
+            <div className="track" key={index}>
+                <img className="my-top-five-album-cover" src={track.album.images[0]?.url} alt=""/>
+                <div className="song-info">
+                    <AudioPlayer 
+                    preview={track.preview_url}
+                    songName={track.name}
+                    artist={track.artists[0].name}
+                    />
+                    <div>
+
+                    </div>
+                </div>
+
+                </div>
+
+
+        )
+    })
+)
+
+
+const displaySongs = 
+
+(
+    
+    userList && userList.map((item) => {
     return(
-    <div key={item._id}>
-        <NavLink to={`/*/profile/${item._id}`} className="nav-link">
-            <div className="user-tag">
-                <img src={item.photo} className="meet-header-photo" alt=""/>
-                {item.name}
+        item.email!=null &&
+
+        <div key={item._id}>
+            <NavLink to={`/profile/${item._id}`} className="nav-link">
+                <div className="user-tag">
+                    <img src={item.photo} className="meet-header-photo" alt=""/>
+                    {item.name}
+                </div>
+            </NavLink>
+
+            <div className="track">
+                <img className="my-top-five-album-cover" src={item.topTrack?.albumCover} alt=""/>
+                    <div className="song-info">
+                        <AudioPlayer 
+                        preview={item.topTrack?.preview}
+                        songName={item.topTrack?.song}
+                        artist={item.topTrack?.artist}
+                        />
+                        <div>
+                            
+                        </div>
+                    </div>
             </div>
-        </NavLink>
-
-        <img className="my-top-five-album-cover" src={item.topTrack.albumCover} alt=""/>
-            <div className="song-info">
-                <AudioPlayer 
-                preview={item.topTrack.preview}
-                songName={item.topTrack.song}
-                artist={item.topTrack.artist}
-                />
-
-                {/* <div className="top-track">
-                    <li>{item.topTrack.song}</li>
-                    <li>{item.topTrack.artist}</li>
-                </div> */}
-
-            </div>
-    </div>
+        </div>
     )
 }
 
 )
 
+)
+
 const loadingDisplay = (
     <div className="display-container">
-        {[0,1,2,3,4,5,6,7,8,9].map(i => {
+        {[0,1,2,3,4,5,6,7,8,9].map((i,index) => {
             return(
-                <div>
+                <div key={index}>
                     <li className="user-tag-loading"></li>
                     <img className="loading-album-cover"/>
                     <div className="top-track">
@@ -96,8 +206,22 @@ const loadingDisplay = (
 return(
     <div className="page">
         <div className="general-container">
-            <p>Meet the Community's Top Songs</p>
-            <div className="display-container">
+                    <div className="general-container-title">
+                        <p>Recommendations for {topSongs[id].name}</p>
+                        <div className="refresh-icon" onClick={getRecs}>
+                            <RiRefreshFill className="icon"/>
+                        </div>
+                    </div>
+                    <div className="display-container">
+                        {recs ? recommendations : loadingDisplay}
+                    </div>
+                </div>
+        <div className="general-container">
+            <div className="general-container-title">
+
+                <p>Top Songs on MelodyMeet</p>
+            </div>
+            <div className={(userList && userList.length<5) ? "left-container" : "display-container"}>
                 {userList ? displaySongs : loadingDisplay}
             </div>
         </div>
