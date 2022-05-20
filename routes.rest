@@ -4,44 +4,25 @@ content-type: application/json
 ###
 
 
-GET http://localhost:3001/users/limit
-content-type: application/json
-
-###
-
-
-GET http://localhost:3001/users/62402c0ad819195fbedf1e42
+GET http://localhost:3001/users
 content-type: application/json 
 
 ###
+
 
 POST http://localhost:3001/users
 content-type: application/json
 
 {
-    "name": "hi",
-    "email": "mikedamadmanmadden11@yahoo.com",
-    "country": "China",
-    "photo": "https://cdn.pixabay.com/photo/2015/12/23/14/56/man-profile-1105761_960_720.jpg",
-    "artist": "deca joins",
-    "artistImage": "https://i.scdn.co/image/ab6761610000e5eb5776c5a4a8dfc971a7e5e591",
-    "genre": ["Chinese Indie","Country"]
-}
-
-###
-
-POST http://localhost:3001/users/songs
-content-type: application/json
-
-{
-    "songName": "hi",
-    "songArtist": "US",
-    "albumCover": "none",
-    "preview": "jjdjfs3r2$"
+    "name": "mook",
+    "country": "US",
+    "photo": "none",
+    "songName": "Paris Texas",
+    "songArtist": "The Chairs",
+    "songAlbumCover": "none",
+    "songPreview": "none"
 
 }
-
-
 
 ###
 
@@ -49,15 +30,10 @@ DELETE http://localhost:3001/users/
 
 ###
 
-PATCH http://localhost:3001/users/62720464f6cee3b67a7d363c
+PATCH http://localhost:3001/users/
 content-type: application/json
 
 {
-    "name": "Melody",
-    "email": "melody@yahoo.com",
-    "country": "China",
-    "photo": "https://cdn.pixabay.com/photo/2015/12/23/14/56/man-profile-1105761_960_720.jpg",
-    "artist": "deca joins",
-    "artistImage": "https://i.scdn.co/image/ab6761610000e5eb5776c5a4a8dfc971a7e5e591",
-    "genre": ["Chinese Indie","Country"]
+    "name": "mort",
+    "country": "Ukraine"
 }

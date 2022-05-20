@@ -12,6 +12,7 @@
         "cors": "^2.8.5",
         "express": "^4.16.4",
         "git": "^0.1.5",
+        "git-filter-repo": "^0.0.30",
         "react-error-boundary": "^3.1.4",
         "react-router-dom": "^6.2.2",
         "reactjs-popup": "^2.0.5",
