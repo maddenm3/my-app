@@ -24,7 +24,7 @@ const CLIENT_ID = process.env.CLIENT_ID;
 const CLIENT_SECRET = process.env.CLIENT_SECRET;
 const REDIRECT_URI = process.env.REDIRECT_URI;
 
-const PORT = 3001;
+const PORT = process.env.PORT || 3001;
 
 app.get('/login', (req, res) => {
   const scope = 'user-read-private user-top-read user-read-currently-playing user-read-email';
