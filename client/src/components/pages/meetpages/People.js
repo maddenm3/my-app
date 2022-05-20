@@ -10,7 +10,8 @@ export default function People(){
 
     const getUsers = async () => {
         try{
-            const response = await axios.get("http://localhost:3001/users")
+            axios.defaults.baseURL = process.env.REACT_APP_URL 
+            const response = await axios.get("/users")
             const data = response.data
             setUserList(data)
 

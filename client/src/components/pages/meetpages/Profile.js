@@ -16,7 +16,8 @@ export default function Profile(){
 
     const getUser = async() => {
         try{
-            const response = await axios.get(`http://localhost:3001/users/${id}`)
+            axios.defaults.baseURL = process.env.REACT_APP_URL
+            const response = await axios.get(`/users/${id}`)
             const data = response.data
             setUser(data)
 
@@ -67,7 +68,7 @@ export default function Profile(){
                                         />
                                     </div>
                                 </div>
-                                <div className="top-artist">
+                                {/* <div className="top-artist">
                                     <h1>{user.name}'s Top Artist</h1>
                                     <img className="my-top-five-album-cover" src={user.artistImage}/>
                                     <li>{user.artist}</li>
@@ -76,26 +77,9 @@ export default function Profile(){
                                     <h1>{user.name}'s Top Genres</h1> 
                                     <div className="genre-tag">{user.genre[0]}</div>
                                     <div className="genre-tag">{user.genre[1]}</div>
-                                </div>
+                                </div> */}
                 </div>
-                {/* <div className="profile-chat-area">
-                    {(myInfo.points < 2) ? 
-                    
-                    <div>
-                        <p>To chat with {user.name}, you need to have at least 10 Melody Points</p>
-                        <p>Current Melody Points: {myInfo.points}</p>
-                        <p className="follow-button">Get Points</p>
-                        
-                    </div> 
 
-                    :
-                    <div className="chat-info">
-                        <h3>Chat Rules</h3>
-                        <p>Your first message to {user.name} must be a book recommendation or an educational Youtube video link that you think they will like.</p>
-                        <NavLink to={{pathname:"/chat", state: {name: user.name}}} className="chat-button"><p>OK, Chat with {user.name}</p></NavLink>
-                    </div>
-                    }
-                </div> */}
              </div>
 }
         </div>

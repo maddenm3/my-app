@@ -4,7 +4,7 @@ import Main from "./components/Main"
 import { useEffect, useState, useContext, useRef } from "react"
 import { UserContext } from "./UserContext"
 import axios from "axios"
-import { accessToken, getCurrentUserProfile, getUserTopTracks, getUserTopArtists, getCurrentlyPlaying } from "./spotify"
+import { accessToken, getCurrentUserProfile, getUserTopTracks, getUserTopArtists } from "./spotify"
 import { catchErrors } from "./utils"
 import { BrowserRouter as Router} from "react-router-dom"
 import LandingPage from "./components/pages/LandingPage"
@@ -64,6 +64,7 @@ export default function App(){
     const fetchData = async () => {
       try {
         if(!isCancelled){
+          axios.defaults.baseURL = 'https://api.spotify.com/v1'
           const { data } = await getCurrentUserProfile()
           const fullName = data.display_name
           const nameArray = fullName.split(' ')
@@ -86,6 +87,7 @@ export default function App(){
 
       try {
         if(!isCancelled){
+            axios.defaults.baseURL = 'https://api.spotify.com/v1'
             const {data} = await getUserTopTracks()
             const key = 0
               setTopSongs(data.items)
@@ -114,6 +116,7 @@ export default function App(){
 
       try {
         if(!isCancelled){
+            axios.defaults.baseURL = 'https://api.spotify.com/v1'            
             const {data} = await getUserTopArtists()
             setArtist(data.items[0].name)
             setGenre([data.items[0].genres[0], data.items[0].genres[1]])
@@ -127,18 +130,7 @@ export default function App(){
           console.error(e)
         }
       }
-      try {
-        if(!isCancelled){
-            const {data} = await getCurrentlyPlaying()
-            setCurrentlyPlaying(data)
-          }
-        }
 
-      catch(e) {
-        if(!isCancelled){
-          console.error(e)
-        }
-      }
     }
 
     catchErrors(fetchData())    
@@ -157,26 +149,33 @@ export default function App(){
     const postData = async() => {
       try{ 
         if(!isCancelled){
-        await axios.post("http://localhost:3001/users", {
-        name: firstName,
-        email: email,
-        country: country,
-        photo: profilePhoto,
-        topTrack: topTrack,
-        artist: artist,
-        artistImage: artistImage,
-        genre: genre
+          axios.defaults.baseURL = process.env.REACT_APP_URL 
+
+          axios.post('/users', {
+          name: firstName,
+          email: email,
+          country: country,
+          photo: profilePhoto,
+          topTrack: topTrack,
+          artist: artist,
+          artistImage: artistImage,
+          genre: genre
         })
+        console.log("posted idk")
+
       }
     } catch(error){
-      if(!isCancelled){
 
+      if(!isCancelled){
         console.log(error)
+        console.log("not posted")
+
       }
+
     }
     }
+
     postData()
-    
 
   return () => {
     isCancelled = true

@@ -15,10 +15,11 @@
         "git-filter-repo": "^0.0.30",
         "react-error-boundary": "^3.1.4",
         "react-router-dom": "^6.2.2",
+        "react-scripts": "^5.0.1",
         "reactjs-popup": "^2.0.5",
         "url": "^0.11.0"
     },
     "devDependencies": {
-        "concurrently": "^4.1.2"
+        "concurrently": "^7.2.0"
     }
 }

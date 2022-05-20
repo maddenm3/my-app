@@ -1,53 +1,40 @@
-import React, { useContext, useState, useRef } from "react"
+import React, { useContext } from "react"
 import { logout } from "../../../spotify"
 import { UserContext } from "../../../UserContext"
 import AudioPlayer from "../meetstructure/AudioPlayer"
-import { AiOutlineCheckCircle } from "react-icons/ai"
 
 
 export default function MyProfile(){
     const user = useContext(UserContext)  
 
-    const topSongs = user.topSongs
+    // const topSongs = user.topSongs
 
-    const trackRef = useRef()
+    // const trackRef = useRef()
 
-    const HandleSetSong = event => {
-        const value = event.target.value
-        alert("Set " + value + " as your favorite song?")
-    }
+    // const displayTopSongs = 
 
-    const displayTopSongs = 
+    // topSongs && 
 
-    topSongs && 
-
-        topSongs.map(song => {
-            return(
-                <div ref={trackRef} className="track" key={song.id}>
-                        <img className="my-top-five-album-cover" src={song.album.images[0].url} alt=""/>
-                        <div className="profile-track-info">
-                            <div className="song-info">
-                                <AudioPlayer 
-                                preview={song.preview_url}
-                                songName={song.name}
-                                artist={song.artists[0].name}
-                                />
+    //     topSongs.map(song => {
+    //         return(
+    //             <div ref={trackRef} className="track" key={song.id}>
+    //                     <img className="my-top-five-album-cover" src={song.album.images[0].url} alt=""/>
+    //                     <div className="profile-track-info">
+    //                         <div className="song-info">
+    //                             <AudioPlayer 
+    //                             preview={song.preview_url}
+    //                             songName={song.name}
+    //                             artist={song.artists[0].name}
+    //                             />
                                 
-                            </div>
-                            {/* <button
-                            value={song.name}
-                            onClick={HandleSetSong}
-                            className={(user.topTrack.song === song.name) ? "top-track-selected" : "set-as-top-track"}>
-                                ✓
-                            </button> */}
-                                
-                        </div>
-                    </div>
+    //                         </div>                                
+    //                     </div>
+    //                 </div>
                 
             
-            )
-        }
-    )
+    //         )
+    //     }
+    // )
 
 
     return(
@@ -88,20 +75,20 @@ export default function MyProfile(){
 
                                 </div>
                 </div>
-                <div className="top-songs-container">
+                {/* <div className="top-songs-container">
                     <h1>My Top 5 Songs</h1>
                     <div className="top-songs">
                         {user && displayTopSongs}
                     </div>
-                </div>
+                </div> */}
                 </div>
                 }
              <div className="logout-button" onClick={logout}>Logout</div>
              </div>
              :
-             <div>
+             <div className="page">
                  <p>Getting your info...</p>
-                 </div>
+                </div>
                  }
         </div>
     )

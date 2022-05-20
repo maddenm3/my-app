@@ -26,7 +26,8 @@ const [id, setId] = useState(0)
 
 const getUsers = async () => {
     try{
-            const response = await axios.get("http://localhost:3001/users/limit")
+            axios.defaults.baseURL = process.env.REACT_APP_URL
+            const response = await axios.get('/users/limit')
             const data = response.data
             setUserList(data)
         
@@ -58,6 +59,7 @@ useEffect(() => {
 const getRecs = async() => {
 
     try{
+            axios.defaults.baseURL = 'https://api.spotify.com/v1'
             const response = await axios.get(`/recommendations?limit=10&seed_tracks=${user && topSongs[id].id}`)
             setRecs(response.data)
 
@@ -94,8 +96,9 @@ useEffect(() => {
     const getUsers = async () => {
       try{
           if(!isCancelled){
-          const response = await axios.get("http://localhost:3001/users")
-          const data = await response.data
+            axios.defaults.baseURL = process.env.REACT_APP_URL 
+            const response = await axios.get("/users")
+            const data = await response.data
             setUserList(data)  
           }
       }

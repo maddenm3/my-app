@@ -17,10 +17,11 @@ content-type: application/json
     "name": "mook",
     "country": "US",
     "photo": "none",
-    "songName": "Paris Texas",
-    "songArtist": "The Chairs",
-    "songAlbumCover": "none",
-    "songPreview": "none"
+    "email": "Parisfexas",
+    "artist": "The Chairs",
+    "artistImage": "none",
+    "genre": [],
+    "topTrack": {}
 
 }
 
