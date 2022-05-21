@@ -3,6 +3,7 @@
     "version": "1.0.0",
     "scripts": {
         "client": "cd client",
+        "build": "cd client && npm build",
         "server": "nodemon server.js",
         "dev": "concurrently \"npm run server\" \"cd client && npm start\"",
         "postinstall": "cd client && npm install"

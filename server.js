@@ -20,9 +20,10 @@ app.use(express.json())
 
 
 
-const CLIENT_ID = process.env.CLIENT_ID;
-const CLIENT_SECRET = process.env.CLIENT_SECRET;
-const REDIRECT_URI = process.env.REDIRECT_URI;
+const CLIENT_ID = process.env.CLIENT_ID
+const CLIENT_SECRET = process.env.CLIENT_SECRET
+const REDIRECT_URI = process.env.REDIRECT_URI
+const PRIVATE_URL = process.env.PRIVATE_URL
 
 const PORT = process.env.PORT || 3001;
 
@@ -68,7 +69,7 @@ app.get('/callback', (req, res) => {
           refresh_token,
           expires_in,
         });
-        res.redirect(`http://localhost:3000/?${queryParams}`);
+        res.redirect(`${PRIVATE_URL}/?${queryParams}`);
 
       } else {
         res.redirect(`/?${querystring.stringify({ error: 'invalid_token' })}`);
