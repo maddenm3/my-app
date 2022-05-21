@@ -103,6 +103,13 @@ app.get('/refresh_token', (req, res) => {
     });
 });
 
+
+app.use(express.static(path.join(__dirname, 'build')));
+
+app.get('/*', function (req, res) {
+   res.sendFile(path.join(__dirname, 'build', 'index.html'));
+ });
+
 // app.get('/login', (req, res) => {
 //   const queryParams = querystring.stringify({
 //     client_id: CLIENT_ID,

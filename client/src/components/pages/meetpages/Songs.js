@@ -97,9 +97,9 @@ useEffect(() => {
       try{
           if(!isCancelled){
             axios.defaults.baseURL = process.env.REACT_APP_URL 
-            const response = await axios.get("/users")
+            const response = await axios.get('/users')
             const data = await response.data
-            setUserList(data)  
+            setUserList(data)
           }
       }
       catch (error){
