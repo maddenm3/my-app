@@ -1,23 +1,18 @@
 import React, { useContext, useState, useEffect } from "react"
 import AudioPlayer from "../meetstructure/AudioPlayer"
 import { useParams } from "react-router-dom"
-import axios from "axios"
-import {BsCheckAll} from "react-icons/bs"
 import { UserContext } from "../../../UserContext"
-import { NavLink } from "react-router-dom"
+import findUser from "../../../axios-api"
 
 export default function Profile(){
     const [user, setUser] = useState(null)
     const [isFollowing, setIsFollowing] = useState(false)
-
-    const myInfo = useContext(UserContext)
     
     const { id } = useParams()
 
     const getUser = async() => {
         try{
-            axios.defaults.baseURL = process.env.REACT_APP_URL
-            const response = await axios.get(`/users/${id}`)
+            const response = await findUser.get(`/${id}`)
             const data = response.data
             setUser(data)
 
@@ -28,15 +23,23 @@ export default function Profile(){
 
     useEffect(()=>{
 
-        getUser()
+        let isCancelled = false
+
+        if(!isCancelled){
+            getUser()
+        }
+
+        return () => {
+            isCancelled = true
+        }
 
 
     }, [])       
   
 
-    const HandleFollowButton = () => {
-        setIsFollowing(!isFollowing)
-    }
+    // const HandleFollowButton = () => {
+    //     setIsFollowing(!isFollowing)
+    // }
 
 
     return(
@@ -68,7 +71,7 @@ export default function Profile(){
                                         />
                                     </div>
                                 </div>
-                                {/* <div className="top-artist">
+                                <div className="top-artist">
                                     <h1>{user.name}'s Top Artist</h1>
                                     <img className="my-top-five-album-cover" src={user.artistImage}/>
                                     <li>{user.artist}</li>
@@ -77,7 +80,7 @@ export default function Profile(){
                                     <h1>{user.name}'s Top Genres</h1> 
                                     <div className="genre-tag">{user.genre[0]}</div>
                                     <div className="genre-tag">{user.genre[1]}</div>
-                                </div> */}
+                                </div>
                 </div>
 
              </div>

@@ -63,6 +63,17 @@ export default function MyProfile(){
                                         />
                                     </div>
                                 </div>
+                                <div className="track">
+                                    <h1>Listening Now</h1>                        
+                                    <img className="my-top-five-album-cover" src={user.currentlyPlaying.album.images[0].url} alt=""/>
+                                    <div className="song-info">
+                                        <AudioPlayer 
+                                        preview={user.currentlyPlaying.preview_url}
+                                        songName={user.currentlyPlaying.name}
+                                        artist={user.currentlyPlaying.artists[0].name}
+                                        />
+                                    </div>
+                                </div>
                                 <div className="top-artist">
                                     <h1>My Top Artist</h1>
                                     <img className="my-top-five-album-cover" src={user.artistImage} alt=""/>

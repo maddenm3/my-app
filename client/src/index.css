@@ -1234,6 +1234,13 @@ input::placeholder{
   margin: 10px 80px;
 }
 
+.homepage{
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  padding-top: 100px;
+}
+
 .recommendation-container{
   display: flex;
 }

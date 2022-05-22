@@ -1,4 +1,5 @@
 require('dotenv').config()
+const path = require("path")
 const express = require("express");
 const app = express()
 const cors = require('cors')
@@ -11,9 +12,7 @@ const db = mongoose.connection
 db.on('error', (error) => console.log(error))
 db.once('open', () => console.log('Connected to Database'))
 
-app.use(cors({
-  origin: 'http://localhost:3000'
-}))
+app.use(cors())
 app.use(express.urlencoded({ extended: true }))
 app.use(express.json())
 
@@ -23,7 +22,7 @@ app.use(express.json())
 const CLIENT_ID = process.env.CLIENT_ID
 const CLIENT_SECRET = process.env.CLIENT_SECRET
 const REDIRECT_URI = process.env.REDIRECT_URI
-const PRIVATE_URL = process.env.PRIVATE_URL
+const URL = process.env.URL || "http://localhost:3000"
 
 const PORT = process.env.PORT || 3001;
 
@@ -69,7 +68,7 @@ app.get('/callback', (req, res) => {
           refresh_token,
           expires_in,
         });
-        res.redirect(`${PRIVATE_URL}/?${queryParams}`);
+        res.redirect(`${URL}/?${queryParams}`);
 
       } else {
         res.redirect(`/?${querystring.stringify({ error: 'invalid_token' })}`);
@@ -104,11 +103,11 @@ app.get('/refresh_token', (req, res) => {
 });
 
 
-app.use(express.static(path.join(__dirname, 'build')));
+// app.use(express.static(path.join(__dirname, 'build')));
 
-app.get('/*', function (req, res) {
-   res.sendFile(path.join(__dirname, 'build', 'index.html'));
- });
+// app.get('/*', function (req, res) {
+//    res.sendFile(path.join(__dirname, 'client/build', 'index.html'));
+//  });
 
 // app.get('/login', (req, res) => {
 //   const queryParams = querystring.stringify({

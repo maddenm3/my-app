@@ -1,17 +1,16 @@
-import axios from "axios"
 import React, { useEffect, useState } from "react"
 import {NavLink } from "react-router-dom"
+import findUser from "../../../axios-api"
 
 
 
 export default function People(){
 
-    const [userList, setUserList] = useState([])
+    const [userList, setUserList] = useState(null)
 
     const getUsers = async () => {
         try{
-            axios.defaults.baseURL = process.env.REACT_APP_URL 
-            const response = await axios.get("/users")
+            const response = await findUser.get('/')
             const data = response.data
             setUserList(data)
 
@@ -54,25 +53,7 @@ export default function People(){
 
         </div>
        )
-    })
-
-    const loadingDisplay = (
-        <div className="display-container">
-            {[0,1,2,3,4,5,6,7,8,9].map((i, index) => {
-                return(
-                    <div key={index}>
-                        <li className="user-tag-loading"></li>
-                        <img className="loading-album-cover" alt=""/>
-                        <div className="top-track">
-                            <li className="loading-tag"></li>
-                        </div>
-                    </div>
-                )
-            }
-    
-            )
     }
-        </div>
     )
 
     const loadingPeople = (

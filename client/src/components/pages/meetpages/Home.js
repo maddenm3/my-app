@@ -8,7 +8,7 @@ export default function Home(){
 
     return(
       
-        <div className="page">
+        <div className="homepage">
             {user.profilePhoto ? 
             <div>
                 <div className="welcome-tag"><img src={user.profilePhoto} className="meet-header-photo"/><h1>Hi, {user.firstName}!</h1></div>
