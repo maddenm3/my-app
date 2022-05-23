@@ -21,9 +21,8 @@ app.use(express.json())
 
 const CLIENT_ID = process.env.CLIENT_ID
 const CLIENT_SECRET = process.env.CLIENT_SECRET
-const REDIRECT_URI = process.env.REDIRECT_URI
+const REDIRECT_URI = process.env.REDIRECT_URI || "http://localhost:3001/callback"
 const URL = process.env.URL || "http://localhost:3000"
-
 const PORT = process.env.PORT || 3001;
 
 app.get('/login', (req, res) => {
@@ -120,6 +119,10 @@ app.get('/refresh_token', (req, res) => {
 
 const usersRouter = require('./routes/users')
 app.use('/users', usersRouter)
+
+app.get('/', function(req, res){
+  res.sendFile('client/public/index.html', {root: __dirname})
+})
 
 
 app.listen(PORT, () => {
