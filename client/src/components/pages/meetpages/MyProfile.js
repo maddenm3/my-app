@@ -63,7 +63,7 @@ export default function MyProfile(){
                                         />
                                     </div>
                                 </div>
-                                <div className="track">
+                                {/* <div className="track">
                                     <h1>Listening Now</h1>                        
                                     <img className="my-top-five-album-cover" src={user.currentlyPlaying.album.images[0].url} alt=""/>
                                     <div className="song-info">
@@ -73,7 +73,7 @@ export default function MyProfile(){
                                         artist={user.currentlyPlaying.artists[0].name}
                                         />
                                     </div>
-                                </div>
+                                </div> */}
                                 <div className="top-artist">
                                     <h1>My Top Artist</h1>
                                     <img className="my-top-five-album-cover" src={user.artistImage} alt=""/>
