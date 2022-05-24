@@ -120,10 +120,10 @@ app.get('/refresh_token', (req, res) => {
 const usersRouter = require('./routes/users')
 app.use('/users', usersRouter)
 
-app.use(express.static(path.join(__dirname, 'client/public')))
+app.use(express.static(path.join(__dirname, 'client/build')))
 
 app.get('/', function(req, res){
-  res.sendFile('client/public/index.html', {root: __dirname})
+  res.sendFile('client/build/index.html', {root: __dirname})
 })
 
 
