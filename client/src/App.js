@@ -47,7 +47,6 @@ export default function App(){
   
   const fetchData = async () => {
     try {
-        // axios.defaults.baseURL = 'https://api.spotify.com/v1'
         const { data } = await getCurrentUserProfile()
         const fullName = data.display_name
         const nameArray = fullName.split(' ')
