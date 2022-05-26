@@ -21,9 +21,13 @@ app.use(express.json())
 
 const CLIENT_ID = process.env.CLIENT_ID
 const CLIENT_SECRET = process.env.CLIENT_SECRET
-const REDIRECT_URI = process.env.REDIRECT_URI || "https://starfish-app-fyqbg.ondigitalocean.app/callback"
+const REDIRECT_URI = "https://starfish-app-fyqbg.ondigitalocean.app/callback"
 const URL = process.env.URL || "https://starfish-app-fyqbg.ondigitalocean.app"
 const PORT = process.env.PORT || 3001;
+
+
+app.use(express.static(path.join(__dirname, 'client/build')))
+app.use(express.static('client/public'))
 
 app.get('/login', (req, res) => {
   const scope = 'user-read-private user-top-read user-read-currently-playing user-read-email';
@@ -120,9 +124,8 @@ app.get('/refresh_token', (req, res) => {
 const usersRouter = require('./routes/users')
 app.use('/users', usersRouter)
 
-app.use(express.static(path.join(__dirname, 'client/build')))
 
-app.get('/', function(req, res){
+app.use((req, res, next) => {
   res.sendFile('client/build/index.html', {root: __dirname})
 })
 
