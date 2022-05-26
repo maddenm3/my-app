@@ -12,7 +12,7 @@ export default function Profile(){
 
     const getUser = async() => {
         try{
-            const response = await findUser.get(`/${id}`)
+            const response = await findUser.get(`/users/${id}`)
             const data = response.data
             setUser(data)
 

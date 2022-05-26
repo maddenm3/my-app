@@ -19,7 +19,7 @@ const [id, setId] = useState(0)
 
 const getUsers = async () => {
     try{
-            const response = await findUser.get('/')
+            const response = await findUser.get('/users')
             const data = response.data
             setUserList(data)
         
