@@ -29,7 +29,7 @@ const PORT = process.env.PORT || 3001;
 app.use(express.static(path.join(__dirname, 'client/build')))
 app.use(express.static('client/public'))
 
-app.use('/login', (req, res) => {
+app.get('https://starfish-app-fyqbg.ondigitalocean.app/login', (req, res) => {
   const scope = 'user-read-private user-top-read user-read-currently-playing user-read-email';
 
   const queryParams = querystring.stringify({
