@@ -25,7 +25,7 @@ const REDIRECT_URI = "https://starfish-app-fyqbg.ondigitalocean.app/callback"
 const URL = process.env.URL || "https://starfish-app-fyqbg.ondigitalocean.app"
 const PORT = process.env.PORT || 3001;
 
-app.get('/login', (req, res) => {
+app.get('/', (req, res) => {
   const scope = 'user-read-private user-top-read user-read-currently-playing user-read-email';
 
   const queryParams = querystring.stringify({
