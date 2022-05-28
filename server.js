@@ -117,12 +117,13 @@ app.get('/refresh_token', (req, res) => {
 //   res.redirect(`https://accounts.spotify.com/authorize?${queryParams}`);
 // });
 
+app.use(express.static(path.join(__dirname, 'client/build')))
+app.use(express.static('client/public'))
+
 const usersRouter = require('./routes/users')
 app.use('/users', usersRouter)
 
 
-app.use(express.static(path.join(__dirname, 'client/build')))
-app.use(express.static('client/public'))
 
 // app.use((req, res, next) => {
 //   res.sendFile('client/build/index.html', {root: __dirname})
