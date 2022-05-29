@@ -22,7 +22,7 @@ export default function LandingPage(){
                 <img src={logo} className="logo" />
                 <h1 className="text-logo">Melody<b>Meet</b></h1>
                 <p>Meet your next favorite song</p>
-                <a onClick={getLogin} className="connect-spotify">Login with Spotify</a>           
+                <a href='/login' className="connect-spotify">Login with Spotify</a>           
         </div>
     )
 }
