@@ -122,7 +122,7 @@ app.get('/refresh_token', (req, res) => {
 const usersRouter = require('./routes/users')
 app.use('/users', usersRouter)
 
-// app.use(express.static(path.join(__dirname, 'client/build')))
+app.use(express.static(path.join(__dirname, 'client/build')))
 // app.use(express.static('client/public'))
 
 app.use((req, res, next) => {
