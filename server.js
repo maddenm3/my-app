@@ -17,13 +17,14 @@ app.use(express.urlencoded({ extended: true }))
 app.use(express.json())
 
 
-
-
 const CLIENT_ID = process.env.CLIENT_ID
 const CLIENT_SECRET = process.env.CLIENT_SECRET
 const REDIRECT_URI = "https://starfish-app-fyqbg.ondigitalocean.app/callback"
 const URL = process.env.URL || "https://starfish-app-fyqbg.ondigitalocean.app"
 const PORT = process.env.PORT || 3001;
+
+const reactBuild = path.join(__dirname, 'client', 'build')
+app.use(express.static(reactBuild))
 
 app.get('/login', (req, res) => {
   const scope = 'user-read-private user-top-read user-read-currently-playing user-read-email';
@@ -101,6 +102,10 @@ app.get('/refresh_token', (req, res) => {
     });
 });
 
+app.get('/mike', async(req, res) => {
+  res.send({message: "Hi Mike"})
+})
+
 
 // app.use(express.static(path.join(__dirname, 'build')));
 
@@ -122,8 +127,13 @@ app.get('/refresh_token', (req, res) => {
 const usersRouter = require('./routes/users')
 app.use('/users', usersRouter)
 
-app.use(express.static(path.join(__dirname, 'client/build')))
-app.get(express.static('client/public'))
+app.get('*', async(req,res) => {
+  res.sendFile(path.join(reactBuild, 'index.html'))
+}
+)
+
+// app.use(express.static(path.join(__dirname, 'client/build')))
+// app.use(express.static('client/public'))
 
 // app.use((req, res, next) => {
 //   res.sendFile('client/build/index.html', {root: __dirname})
