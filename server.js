@@ -23,8 +23,10 @@ const REDIRECT_URI = "https://starfish-app-fyqbg.ondigitalocean.app/callback"
 const URL = process.env.URL || "https://starfish-app-fyqbg.ondigitalocean.app"
 const PORT = process.env.PORT || 3001;
 
-const reactBuild = path.join(__dirname, 'client', 'build')
-app.use(express.static(reactBuild))
+// const reactBuild = path.join(__dirname, 'client', 'build')
+// app.use(express.static(reactBuild))
+
+app.use(express.static(path.resolve(__dirname, 'client/build')))
 
 app.get('/login', (req, res) => {
   const scope = 'user-read-private user-top-read user-read-currently-playing user-read-email';
@@ -128,7 +130,7 @@ const usersRouter = require('./routes/users')
 app.use('/users', usersRouter)
 
 app.get('*', async(req,res) => {
-  res.sendFile(path.join(reactBuild, 'index.html'))
+  res.sendFile(path.resolve(__dirname, 'client/build', 'index.html'))
 }
 )
 
