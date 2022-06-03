@@ -23,7 +23,7 @@ export default function LandingPage(){
                 <img src={logo} className="logo" />
                 <h1 className="text-logo">Melody<b>Meet</b></h1>
                 <p>Meet your next favorite song</p>
-                <Link to='/users' className="connect-spotify">Login with Spotify</Link>           
+                <a href='https://starfish-app-fyqbg.ondigitalocean.app/users' className="connect-spotify">Login with Spotify</a>           
         </div>
     )
 }
