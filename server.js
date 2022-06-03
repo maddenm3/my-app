@@ -28,7 +28,7 @@ const PORT = process.env.PORT || 3001;
 
 app.use(express.static(path.resolve(__dirname, 'client/build')))
 
-app.get('/login', (req, res) => {
+app.use('/login', (req, res) => {
   const scope = 'user-read-private user-top-read user-read-currently-playing user-read-email';
 
   const queryParams = querystring.stringify({
@@ -45,7 +45,7 @@ app.get('/login', (req, res) => {
 //   res.send('Callback')
 // })
 
-app.get('/callback', (req, res) => {
+app.use('/callback', (req, res) => {
   const code = req.query.code || null;
 
   axios({
