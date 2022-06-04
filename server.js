@@ -47,7 +47,7 @@ app.get('/login', async (req, res) => {
 //   res.send('Callback')
 // })
 
-app.grant_type('/callback', async (req, res) => {
+app.get('/callback', async (req, res) => {
   const code = req.query.code || null;
 
   axios({
