@@ -28,7 +28,7 @@ const PORT = process.env.PORT || 3001;
 
 app.use(express.static(path.resolve(__dirname, 'client/build')))
 
-app.use('/login', (req, res) => {
+app.get('/login', (req, res) => {
   const scope = 'user-read-private user-top-read user-read-currently-playing user-read-email';
 
   const queryParams = querystring.stringify({
@@ -38,7 +38,7 @@ app.use('/login', (req, res) => {
     scope: scope,
   });
 
-  res.redirect(`https://accounts.spotify.com/authorize?${queryParams}`);
+  res.redirect('https://accounts.spotify.com/');
 });
 
 // app.get('/callback', (req, res) => {
