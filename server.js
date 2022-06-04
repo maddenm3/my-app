@@ -28,24 +28,23 @@ const PORT = process.env.PORT || 3001;
 
 app.use(express.static(path.resolve(__dirname, 'client/build')))
 
-app.get('/login', async (req, res) => {
-  // const scope = 'user-read-private user-top-read user-read-currently-playing user-read-email';
+app.get('/login', async(req, res) => {
+  const scope = 'user-read-private user-top-read user-read-currently-playing user-read-email';
 
-  // const queryParams = querystring.stringify({
-  //   client_id: CLIENT_ID,
-  //   response_type: 'code',
-  //   redirect_uri: REDIRECT_URI,
-  //   scope: scope,
-  // });
-  // res.redirect(`https://accounts.spotify.com/authorize?${queryParams}`);
-  res.send({message: 'Hi login'})
+  const queryParams = querystring.stringify({
+    client_id: CLIENT_ID,
+    response_type: 'code',
+    redirect_uri: REDIRECT_URI,
+    scope: scope,
+  });
+  res.redirect(`https://accounts.spotify.com/authorize?${queryParams}`);
 });
 
 // app.get('/callback', (req, res) => {
 //   res.send('Callback')
 // })
 
-app.get('/callback', async (req, res) => {
+app.get('/callback', async(req, res) => {
   const code = req.query.code || null;
 
   axios({
