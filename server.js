@@ -37,9 +37,7 @@ app.get('/login', async (req, res) => {
   //   redirect_uri: REDIRECT_URI,
   //   scope: scope,
   // });
-
   // res.redirect(`https://accounts.spotify.com/authorize?${queryParams}`);
-  // res.redirect('https://bing.com')
   res.send({message: 'Hi login'})
 });
 
