@@ -9,7 +9,7 @@ import { catchErrors } from "./utils"
 import { BrowserRouter as Router} from "react-router-dom"
 import LandingPage from "./components/pages/LandingPage"
 import { ErrorBoundary } from "react-error-boundary"
-import findUser from "./axios-api"
+import allUsers from "./axios-api"
 
 export default function App(){
   const [firstName, setFirstName] = useState("")
@@ -141,37 +141,33 @@ catch(e) {
 
   }, []);
 
+
+
+  const postData = async() => {
+    try{ 
+        allUsers.post('/users', {
+        name: firstName,
+        email: email,
+        country: country,
+        photo: profilePhoto,
+        topTrack: topTrack,
+        artist: artist,
+        artistImage: artistImage,
+        genre: genre
+      })
+  } catch(error){
+      console.log(error)
+  }
+  }
+
  
   useEffect(() => {
 
     let isCancelled = false
 
-    const postData = async() => {
-      try{ 
-        if(!isCancelled){
-          findUser.post('/', {
-          name: firstName,
-          email: email,
-          country: country,
-          photo: profilePhoto,
-          topTrack: topTrack,
-          artist: artist,
-          artistImage: artistImage,
-          genre: genre
-        })
-
-      }
-    } catch(error){
-
-      if(!isCancelled){
-        console.log(error)
-
-      }
-
+    if(!isCancelled){
+      postData()
     }
-    }
-
-    postData()
 
   return () => {
     isCancelled = true

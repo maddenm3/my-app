@@ -49,10 +49,9 @@ useEffect(() => {
 
 
 const getRecs = async() => {
-
     try{
             // axios.defaults.baseURL = 'https://api.spotify.com/v1'
-            const response = await axios.get(`https://api.spotify.com/v1/recommendations?limit=10&seed_tracks=${user && topSongs[id].id}`)
+            const response = await axios.get(`https://api.spotify.com/v1/recommendations?limit=10&seed_tracks=${topSongs[id].id}`)
             setRecs(response.data)
 
 
