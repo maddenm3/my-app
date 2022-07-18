@@ -20,12 +20,12 @@ const songSchema = new mongoose.Schema({
     }
 })
 
-const topSongsSchema = new mongoose.Schema({
-    songs: {
-        type: Object,
-        require: true
-    }
-})
+// const topSongsSchema = new mongoose.Schema({
+//     songs: {
+//         type: Object,
+//         require: true
+//     }
+// })
 
 const userSchema = new mongoose.Schema({
     name: {
@@ -45,8 +45,8 @@ const userSchema = new mongoose.Schema({
         require: true
     },
 
-     topTrack: songSchema,
-
+     topTrack: songSchema
+     ,
      artist: {
         type: String,
         require: true
@@ -58,7 +58,7 @@ const userSchema = new mongoose.Schema({
     genre: {
         type: Array,
         require: true
-    },
+    }
 
 })
 

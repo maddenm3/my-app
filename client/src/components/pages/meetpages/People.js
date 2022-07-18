@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react"
 import {NavLink } from "react-router-dom"
 import findUser from "../../../axios-api"
-
+import AudioPlayer from "../meetstructure/AudioPlayer"
 
 
 export default function People(){
@@ -26,6 +26,7 @@ export default function People(){
         let isCancelled=false
         if(!isCancelled){
             getUsers()
+            console.log("users got")
         }
 
         return ()=>{
@@ -55,6 +56,48 @@ export default function People(){
        )
     }
     )
+    
+
+    const displaySongs = 
+
+    (
+    
+    userList ? userList.map((item) => {
+    return(
+        item.email!=null &&
+
+        <div key={item._id}>
+            <NavLink to={`/profile/${item._id}`} className="nav-link">
+                <div className="user-tag">
+                    <img src={item.photo} className="meet-header-photo" alt=""/>
+                    {item.name}
+                </div>
+            </NavLink>
+
+            <div className="track">
+                <img className="my-top-five-album-cover" src={item.topTrack?.albumCover} alt=""/>
+                    <div className="song-info">
+                        <AudioPlayer 
+                        preview={item.topTrack?.preview}
+                        songName={item.topTrack?.song}
+                        artist={item.topTrack?.artist}
+                        />
+                        <div>
+                            
+                        </div>
+                    </div>
+            </div>
+        </div>
+    )
+}
+
+)
+:
+<div>
+    Loading...
+</div>
+
+)
 
     const loadingPeople = (
         <div className="display-container">
@@ -84,6 +127,15 @@ export default function People(){
                     {userList ? userDisplay : loadingPeople} 
                 </div>
             </div>
+            <div className="general-container">
+            <div className="general-container-title">
+
+                <p>Top Songs on MelodyMeet</p>
+            </div>
+            <div className={(userList && userList.length<5) ? "left-container" : "display-container"}>
+                {userList ? displaySongs : loadingPeople}
+            </div>
+        </div>
         </div>
     )
 }

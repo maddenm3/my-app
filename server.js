@@ -5,10 +5,13 @@ const app = express()
 const cors = require('cors')
 const querystring = require('querystring')
 const axios = require('axios')
-
+const http = require('http')
 const mongoose = require('mongoose')
+const { Server } = require('socket.io')
+
 mongoose.connect(process.env.DATABASE_URI, { useNewUrlParser: true })
 const db = mongoose.connection
+
 db.on('error', (error) => console.log(error))
 db.once('open', () => console.log('Connected to Database'))
 
@@ -16,17 +19,18 @@ app.use(cors())
 app.use(express.urlencoded({ extended: true }))
 app.use(express.json())
 
-
 const CLIENT_ID = process.env.CLIENT_ID
 const CLIENT_SECRET = process.env.CLIENT_SECRET
-const REDIRECT_URI = "https://starfish-app-fyqbg.ondigitalocean.app/callback"
+const REDIRECT_URI = process.env.REDIRECT_URI || "https://starfish-app-fyqbg.ondigitalocean.app/callback"
 const URL = process.env.URL || "https://starfish-app-fyqbg.ondigitalocean.app"
 const PORT = process.env.PORT || 3001;
+const NODE_ENV = process.env.NODE_ENV
 
-// const reactBuild = path.join(__dirname, 'client', 'build')
-// app.use(express.static(reactBuild))
+if(process.env.NODE_ENV === 'production'){
+  app.use(express.static(path.resolve(__dirname, 'client/build')))
+}
 
-app.use(express.static(path.resolve(__dirname, 'client/build')))
+console.log(process.env.DATABASE_URI)
 
 app.get('/login', async(req, res) => {
   const scope = 'user-read-private user-top-read user-read-currently-playing user-read-email';
@@ -38,11 +42,9 @@ app.get('/login', async(req, res) => {
     scope: scope,
   });
   res.redirect(`https://accounts.spotify.com/authorize?${queryParams}`);
+  console.log("redirected")
 });
 
-// app.get('/callback', (req, res) => {
-//   res.send('Callback')
-// })
 
 app.get('/callback', async(req, res) => {
   const code = req.query.code || null;
@@ -107,42 +109,46 @@ app.get('/mike', async(req, res) => {
   res.send({message: "Hi Mike"})
 })
 
-
-// app.use(express.static(path.join(__dirname, 'build')));
-
-// app.get('/*', function (req, res) {
-//    res.sendFile(path.join(__dirname, 'client/build', 'index.html'));
-//  });
-
-// app.get('/login', (req, res) => {
-//   const queryParams = querystring.stringify({
-//     client_id: CLIENT_ID,
-//     response_type: 'code',
-//     redirect_uri: REDIRECT_URI,
-//   })
-//   res.redirect(`https://accounts.spotify.com/authorize?${queryParams}`);
-// });
-
-
-
 const usersRouter = require('./routes/users')
 app.use('/users', usersRouter)
 
-app.get('*', async(req,res) => {
-  res.sendFile(path.resolve(__dirname, 'client/build', 'index.html'))
+const inboxRouter = require('./routes/inbox')
+app.use('/inbox', inboxRouter)
+
+
+if(process.env.NODE_ENV === 'production'){
+  app.get('*', async(req,res) => {
+    res.sendFile(path.resolve(__dirname, 'client/build', 'index.html'))
+  }
+  )
 }
-)
-
-// app.use(express.static(path.join(__dirname, 'client/build')))
-// app.use(express.static('client/public'))
-
-// app.use((req, res, next) => {
-//   res.sendFile('client/build/index.html', {root: __dirname})
-// })
 
 
-app.listen(PORT, () => {
+const server = app.listen(PORT, () => {
   console.log(`Server listening on ${PORT}`);
 });
+
+
+const io = new Server(server, {
+  cors:{
+    origin: process.env.URL,
+    methods: ["GET", "POST"]
+  }
+
+})
+
+io.on("connection", (socket) => {
+  console.log(`User connected ${socket.id}`)
+
+  socket.on("join_room", (data)=>{
+    socket.join(data)
+  })
+
+  socket.on("send_message", (data) => {
+    console.log(data)
+    socket.to(data.room).emit("receive_message", data)
+  })
+})
+
 
 

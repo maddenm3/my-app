@@ -23,12 +23,14 @@ export default function App(){
   const [previewUrl, setPreviewUrl] = useState("")
   const [albumCover, setAlbumCover] = useState("")
   const [isPlaying, setIsPlaying] = React.useState(false)
+  const [following, setFollowing] = useState([])
   const [topSongs, setTopSongs] = useState([{
     song: "",
     artist: "",
     albumCover: "",
     preview: ""
   }])
+  const [userId, setUserId] = useState(null)
 
   const [similarArtists, setSimilarArtists] = useState(null)
   const [points, setPoints] = useState(2)
@@ -107,31 +109,27 @@ export default function App(){
       
     }
 
-    try {
-      const {data} = await getListeningNow()
-      setCurrentlyPlaying(data.item)
-
+//     try {
+//       const {data} = await getListeningNow()
+//       setCurrentlyPlaying(data.item)
     
+//   }
+//   catch(e) {
+//     console.error(e)
+
+// }
   }
-catch(e) {
-    console.error(e)
+
   
-}
-
-  }
-
-
   useEffect(() => {
     setToken(accessToken)
     setJustLoggedIn(true)
 
     let isCancelled = false
 
-
-
     if(!isCancelled){
       if(accessToken){
-        catchErrors(fetchData()) 
+        catchErrors(fetchData())
       }
     }   
 
@@ -140,8 +138,6 @@ catch(e) {
     }
 
   }, []);
-
-
 
   const postData = async() => {
     try{ 
@@ -154,46 +150,59 @@ catch(e) {
         artist: artist,
         artistImage: artistImage,
         genre: genre
-      })
+        }
+      )
   } catch(error){
       console.log(error)
   }
   }
 
- 
+  // const fetchUserData = async() => {
+  //   try{
+  //     const response = await allUsers.get('/users/user', {
+  //       email: email
+  //     })
+  //     setUserId(response._id)
+  //     console.log(userId)
+  //   }
+  //   catch(error){
+  //     console.log(error)
+  //   }
+  // }
+
   useEffect(() => {
 
-    let isCancelled = false
+    let isTrue = true
 
-    if(!isCancelled){
+    if(isTrue){
       postData()
+      console.log("posted or updated")
+      // fetchUserData()
+
     }
 
   return () => {
-    isCancelled = true
+    isTrue = false
   }
-
-
-
-  }, [])
+}, [topTrack, artistImage])
 
 
 
   const user = {
     token: token,
     firstName: firstName,
+    email: email,
     profilePhoto: profilePhoto,
     country: country,
     topSongs: topSongs,
     topTrack: topTrack,
     artist: artist,
     artistImage: artistImage,
-    artistId,
+    artistId: artistId,
     currentlyPlaying: currentlyPlaying,
     genre: genre,
     preview: previewUrl,
     albumCover: albumCover,
-    isPlaying: isPlaying,
     similarArtists: similarArtists,
     points: points
   }

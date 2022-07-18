@@ -4,6 +4,9 @@ const nodeExternals = require('webpack-node-externals');
 module.exports = {
   entry: './server/index.js',
   target: 'node',
+  node: {
+    net: 'empty'
+  },
   externals: [nodeExternals()],
   output: {
     path: path.resolve('server-build'),
@@ -16,5 +19,11 @@ module.exports = {
         use: 'babel-loader'
       }
     ]
+  },
+  resolve: {
+    fallback: {
+      http: false,
+      path: false
+    }
   }
 };

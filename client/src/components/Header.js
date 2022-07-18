@@ -9,7 +9,7 @@ import { FaRegUser } from "react-icons/fa"
 import {CgProfile} from "react-icons/cg"
 import {FiHeadphones} from "react-icons/fi"
 import {IoIosPeople } from "react-icons/io"
-
+import {HiChatAlt} from "react-icons/hi"
 import { UserContext } from "../UserContext"
 import logo from "./../logo3.svg"
 
@@ -26,8 +26,10 @@ export default function Header(props){
             </div>
             <div className="sidebar">
                         {/* <div><NavLink to="/" className={({isActive}) => isActive ? "sidenav-selected" : "sidenav" }><MdLibraryMusic/></NavLink></div> */}
-                        <div><NavLink to="/songs" className={({isActive}) => isActive ? "sidenav-selected" : "sidenav"}><MdLibraryMusic /><p>Songs</p></NavLink></div>
-                        <div><NavLink to="/people" className={({isActive}) => isActive ? "sidenav-selected" : "sidenav"}><IoIosPeople /><p>People</p></NavLink></div>
+                        {/* <div><NavLink to="/songs" className={({isActive}) => isActive ? "sidenav-selected" : "sidenav"}><MdLibraryMusic /><p>Songs</p></NavLink></div> */}
+                        <div><NavLink to="/discover" className={({isActive}) => isActive ? "sidenav-selected" : "sidenav"}><IoIosPeople /><p>Discover</p></NavLink></div>
+                        {/* <div><NavLink to="/chat" className={({isActive}) => isActive ? "sidenav-selected" : "sidenav"}><HiChatAlt /><p>Chat</p></NavLink></div> */}
+
                         {/* <div><NavLink to="/cafe" className={({isActive}) => isActive ? "sidenav-selected" : "sidenav" }><MdOutlineLocalCafe/></NavLink></div> */}
                         <div> 
                         <NavLink to="/my-profile" className={({isActive}) => isActive ? "profile-tag-selected" : "profile-tag"}>

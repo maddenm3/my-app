@@ -8,6 +8,7 @@ import Profile from "../components/pages/meetpages/Profile"
 
 import { UserContext } from "../UserContext"
 import LandingPage from "./pages/LandingPage"
+import Chat from "./pages/meetpages/Chat"
 
 
 export default function Main(props){
@@ -19,8 +20,9 @@ export default function Main(props){
         <Routes>
 
             <Route index element={<Home />} />
-            <Route path="/songs" element={<Songs />}/>
-            <Route path="/people" element={<People />} />
+            {/* <Route path="/songs" element={<Songs />}/> */}
+            <Route path="/discover" element={<People />} />
+            {/* <Route path="/chat" element={<Chat />} /> */}
             <Route path="/profile/:id" element={<Profile />}/>
             <Route path="/my-profile" element={<MyProfile />}/>
 

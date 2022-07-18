@@ -164,8 +164,7 @@ axios.defaults.headers['Content-Type'] = 'application/json';
 //       console.error(e)
 //     }
 //   }
-export const getCurrentUserProfile = () => axios.get('/me');
-
+export const getCurrentUserProfile = () => axios.get('/me')
 export const getUserTopTracks = () => axios.get('/me/top/tracks?limit=5')
 export const getUserTopArtists = () => axios.get('/me/top/artists?limit=1')
 export const getListeningNow = () => axios.get('me/player/currently-playing')

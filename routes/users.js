@@ -16,7 +16,27 @@ router.get('/', async (req, res) => {
     }
 })
 
-//get 5 users
+
+//get one user
+// router.get('/user', async (req, res) => {
+//     const email = req.body.email
+//     try{
+//         const users = await User.findOne({email: email}, function(err,doc){
+//             if(err){
+//                 console.log(err)
+//             }
+//             else{
+//                 console.log(doc)
+//             }
+//         } )
+//         res.json(users)
+//     }
+//     catch (err){
+//         res.status(500).json({ message: err.message })
+//     }
+// })
+
+//get 10 users
 router.get('/limit', async (req, res) => {
     try{
         const users = await User.find().limit(10)
@@ -113,19 +133,19 @@ router.get('/songs', async (req, res) => {
 })
 
 //update a user
-router.patch('/:id', getUser, async (req, res) => {
-    if (req.body.name != null){
-        res.user.name = req.body.name
-    }
-    if (req.body.country != null){
-        res.user.country = req.body.country
-    }
-    if (req.body.photo != null){
-        res.user.photo = req.body.photo
-    }
+router.post('/', async (req, res) => {
     try{
-        const updatedUser = await res.user.save()
-        res.json(updatedUser)
+        User.findOneAndUpdate(
+            {email: req.body.email},
+            {$push:{following: req.body.following}}, function(err, doc){
+                if(err){
+                    console.log(err)
+                }
+                else{
+                    console.log(doc)
+                }
+            }
+        )
     }
     catch (err){
         res.status(400).json({ message: err.message })

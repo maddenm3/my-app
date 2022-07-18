@@ -18,12 +18,14 @@ export default function LandingPage(){
         }
     }
 
+    const login = "http://localhost:3001/login" || 'https://starfish-app-fyqbg.ondigitalocean.app/login'
+
     return(
         <div className="landing-page">
                 <img src={logo} className="logo" />
                 <h1 className="text-logo">Melody<b>Meet</b></h1>
                 <p>Meet your next favorite song</p>
-                <a href='https://starfish-app-fyqbg.ondigitalocean.app/login' className="connect-spotify">Login with Spotify</a>           
+                <a href={login} className="connect-spotify">Login with Spotify</a>           
         </div>
     )
 }

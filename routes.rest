@@ -14,16 +14,17 @@ POST http://localhost:3001/users
 content-type: application/json
 
 {
-    "name": "mook",
+    "name": "jjjoojioj",
     "country": "US",
     "photo": "none",
-    "email": "Parisfexas",
+    "email": "ojiib",
     "artist": "The Chairs",
     "artistImage": "none",
-    "genre": [],
+    "genre": ["ff", "ff"],
     "topTrack": {}
-
 }
+
+
 
 ###
 
@@ -31,10 +32,31 @@ DELETE http://localhost:3001/users/
 
 ###
 
-PATCH http://localhost:3001/users/
+PATCH http://localhost:3001/users
 content-type: application/json
 
 {
-    "name": "mort",
-    "country": "Ukraine"
+    "email": "jjj",
+    "following": "me8789"
 }
+
+
+###
+GET http://localhost:3001/inbox
+content-type: application/json
+
+###
+
+
+
+POST http://localhost:3001/inbox
+content-type: application/json
+
+{
+   "users": ["af8923", "sdfaj9"],
+   "messages": ["hi", "whatsup"]
+}
+
+
+
+###

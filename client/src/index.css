@@ -247,18 +247,15 @@ input{
   padding: 10px;
   display: flex;
   align-items: center;
-  font-size: 20px;
-
+  font-size: 16px;
 }
 
 input::placeholder{
-  font-size: 20px;
+  color:rgb(167, 167, 167);
+  font-size: 16px;
   font-family: "Poppins";
 }
 
-.input:focus{
-
-}
 
 .meet-selections{
   width: fit-content;
@@ -595,10 +592,34 @@ input::placeholder{
   gap: 50px;
 }
 
-.profile-container h1{
+.profile-container h1, .profile-chat h1{
   font-size: 14px;
   font-weight: 300;
   color:rgb(167, 167, 167);
+}
+
+.profile-chat{
+  margin-top: 50px;
+}
+
+.profile-chat input{
+  height: 50px;
+  width: 50%;
+}
+
+.send-button{
+  color: black;
+  width: fit-content;
+  border: none;
+  border-left: 3px solid #FC3F93;
+  background: white;
+  margin-top: 10px;
+  cursor: pointer;
+}
+
+.send-button:hover{
+  color: #FC3F93;
+  font-weight: bold;
 }
 
 .profile-photo{
@@ -1465,16 +1486,6 @@ img{
   transition: .2s;
 }
 
-.send-button{
-  color: black;
-  transition: .2s;
-}
-
-.send-button:hover{
-  color: goldenrod;
-  transition: .2s;
-}
-
 .fixed-message-buttons{
   display: flex;
 }
@@ -1532,6 +1543,27 @@ img{
   height: 100px;
 }
  */
+
+ .chat-contact{
+  display: flex;
+  width: fit-content;
+  border-radius: 99px;
+  padding: 10px 10px;
+ }
+
+ .chat-contact:hover{
+  background: rgba(252,63,147,.1);
+ }
+
+ .chat-photo{
+  height: 45px;
+  width: 45px;
+  border-radius: 50%;
+  background:rgb(241, 241, 241);
+  object-fit: cover;
+  margin-right: 5px;
+ }
+
 
  .chat-page{
  }
