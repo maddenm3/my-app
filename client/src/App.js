@@ -171,12 +171,13 @@ export default function App(){
   // }
 
   useEffect(() => {
-
+  
     let isTrue = true
+
 
     if(isTrue){
       postData()
-      console.log("posted or updated")
+      console.log("posted / updated")
       // fetchUserData()
 
     }
