@@ -11,7 +11,7 @@ export default function People(){
 
     const getUsers = async () => {
         try{
-            const response = await axios.get('/users')
+            const response = await findUser.get('/users')
             const data = response.data
             setUserList(data)
 

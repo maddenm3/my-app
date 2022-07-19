@@ -23,7 +23,7 @@ const CLIENT_ID = process.env.CLIENT_ID
 const CLIENT_SECRET = process.env.CLIENT_SECRET
 const REDIRECT_URI = process.env.REDIRECT_URI || "https://melodymeet.com/callback"
 const URL = process.env.URL || "https://melodymeet.com"
-const PORT = process.env.PORT || 3001;
+const PORT = process.env.PORT;
 const NODE_ENV = process.env.NODE_ENV
 
 if(process.env.NODE_ENV === 'production'){
@@ -104,10 +104,6 @@ app.get('/refresh_token', (req, res) => {
       res.send(error);
     });
 });
-
-app.get('/mike', async(req, res) => {
-  res.send({message: "Hi Mike"})
-})
 
 const usersRouter = require('./routes/users')
 app.use('/users', usersRouter)
