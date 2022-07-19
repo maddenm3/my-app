@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react"
 import {NavLink } from "react-router-dom"
 import findUser from "../../../axios-api"
+import axios from "axios"
 import AudioPlayer from "../meetstructure/AudioPlayer"
 
 
@@ -10,7 +11,7 @@ export default function People(){
 
     const getUsers = async () => {
         try{
-            const response = await axios.get('https://melodymeet.com/users')
+            const response = await axios.get('/users')
             const data = response.data
             setUserList(data)
 
