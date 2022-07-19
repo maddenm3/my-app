@@ -10,7 +10,7 @@ export default function People(){
 
     const getUsers = async () => {
         try{
-            const response = await findUser.get('/users')
+            const response = await axios.get('https://melodymeet.com/users')
             const data = response.data
             setUserList(data)
 
@@ -56,7 +56,7 @@ export default function People(){
        )
     }
     )
-    
+
 
     const displaySongs = 
 
