@@ -18,7 +18,7 @@ export default function LandingPage(){
         }
     }
 
-    const login = "http://localhost:3001/login" || 'https://starfish-app-fyqbg.ondigitalocean.app/login'
+    const login = 'https://melodymeet.com/login'
 
     return(
         <div className="landing-page">

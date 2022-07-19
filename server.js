@@ -21,8 +21,8 @@ app.use(express.json())
 
 const CLIENT_ID = process.env.CLIENT_ID
 const CLIENT_SECRET = process.env.CLIENT_SECRET
-const REDIRECT_URI = process.env.REDIRECT_URI || "https://starfish-app-fyqbg.ondigitalocean.app/callback"
-const URL = process.env.URL || "https://starfish-app-fyqbg.ondigitalocean.app"
+const REDIRECT_URI = process.env.REDIRECT_URI || "https://melodymeet.com/callback"
+const URL = process.env.URL || "https://melodymeet.com"
 const PORT = process.env.PORT || 3001;
 const NODE_ENV = process.env.NODE_ENV
 

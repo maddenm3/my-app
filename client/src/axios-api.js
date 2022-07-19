@@ -1,10 +1,10 @@
 import axios from "axios"
 
-const db = process.env.REACT_APP_DB || "https://starfish-app-fyqbg.ondigitalocean.app"
+const db = process.env.REACT_APP_DB || "https://melodymeet.com"
 
 
 export default axios.create({
-    baseURL: "http://localhost:3001",
+    baseURL: "https://melodymeet.com",
     headers:{
         "Content-type": "application/json"
     }
