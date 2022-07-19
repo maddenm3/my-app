@@ -20,23 +20,23 @@ export default function Profile(){
     const { id } = useParams()
     const user = useContext(UserContext)
     const email = user.email
-    const socket = io.connect("http://localhost:3001")
+    // const socket = io.connect("http://localhost:3001")
     const roomNum = id+user.id
 
 
-    const sendMessage = () => {
-        setRoom(roomNum)
-        console.log(room)
+    // const sendMessage = () => {
+    //     setRoom(roomNum)
+    //     console.log(room)
 
-        socket.emit("send_message", {message})
-        socket.emit("join_room", {room})
-        if(message!=""){
-            setMessageSent(true)
-            console.log("message sent!")
-        }
-        setMessage("")
+    //     socket.emit("send_message", {message})
+    //     socket.emit("join_room", {room})
+    //     if(message!=""){
+    //         setMessageSent(true)
+    //         console.log("message sent!")
+    //     }
+    //     setMessage("")
         
-    }
+    // }
     // const receiveMessage = () => {
     //     socket.emit("receive_message", {data})
     // }
@@ -52,13 +52,13 @@ export default function Profile(){
         }
     }, [message])
 
-    useEffect(()=>{
-        socket.on("receive_message", (data) => {
-            setMessageReceived(data.message)
-            console.log(messageReceived)
-        })
+    // useEffect(()=>{
+    //     socket.on("receive_message", (data) => {
+    //         setMessageReceived(data.message)
+    //         console.log(messageReceived)
+    //     })
         
-    },[socket])
+    // },[socket])
 
 
     const getUser = async() => {
