@@ -3,6 +3,8 @@ const router = express.Router()
 const User = require('../models/UserSchema')
 const Song = require('../models/SongSchema')
 const url = require('url')
+const cors = require('cors')
+router.use(cors())
 
 
 //get all users
